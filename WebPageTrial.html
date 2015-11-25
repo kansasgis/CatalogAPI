@@ -38,15 +38,14 @@ var bigOut = "";
 var i;
 for(i = 0; i < arr.catalog.catalogEntries.length; i++){
 bigOut += '<p><b>' + arr.catalog.catalogEntries[i].Title +
-'</b> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br>' +
-arr.catalog.catalogEntries[i].Description + '<br> Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator +
-', <a href="' + arr.catalog.catalogEntries[i].WebLink + '">Permalink</a><br>';
+'</b> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br> <a href="' + arr.catalog.catalogEntries[i].WebLink + '">Permalink</a><br>' +
+arr.catalog.catalogEntries[i].Description + '<br> Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>';
 
 if (arr.catalog.catalogEntries[i].MetadataLink != "") {
-	bigOut += '<a href="' + arr.catalog.catalogEntries[i].MetadataLink + '">Full Metadata</a><br><br>'}
+	bigOut += '<a href="' + arr.catalog.catalogEntries[i].MetadataLink + '">Full Metadata</a><br>'}
 
 if (arr.catalog.catalogEntries[i].DownloadLink.length > 0) {
-bigOut += 'Data Downloads: <br>';
+bigOut += '<br>Data Downloads: <br>';
 var ddi;
 for(ddi = 0; ddi < arr.catalog.catalogEntries[i].DownloadLink.length; ddi++){
 bigOut += '<a href="' + arr.catalog.catalogEntries[i].DownloadLink[ddi].url + '">'
