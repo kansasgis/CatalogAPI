@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Kansas Catalog</title>
+</head>
+
+<body>
+
+  <h1>Welcome to Our Company</h1>
+  <h2>Web Site Main Ingredients:</h2>
+
+  <p id="demo"></p>
+  <p>Style Sheets (CSS)</p>
+  <p>Computer Code (JavaScript)</p>
+  <p>Live Data (Files and Databases)</p>
+
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "https://raw.githubusercontent.com/kansasgis/CatalogAPI/master/DASC_Catalog.json";
+
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var myArr = JSON.parse(xmlhttp.responseText);
+        myFunction(myArr);
+    }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+    var out = arr.state[0];
+document.getElementById("demo").innerHTML = out;
+}
+</script)
+</body>
+</html>
