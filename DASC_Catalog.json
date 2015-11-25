@@ -46,7 +46,7 @@
 				 {"DataTitle": "Kansas Highways: Geodatabase",
 				  "DataType": "File Geodatabase",
 				  "url": "http://data.kansasgis.org/transportation/gdb/kdot/KDOT_StateSystem.zip"}],
-		"ServiceLink": ["http://services.kansasgis.org/arcgis/rest/services/PLSS/section_township_range_3/MapServer"],
+		"ServiceLink": ["http://services.kansasgis.org/arcgis/rest/services/Transportation/KDOT_Roads/MapServer"],
 		"MetadataLink": "http://kansasgis.org/catalog/_cat_metadata.cfm?meta_id=521",
 		"DataCategory": "Transportation",
 		"Documentation": [],
