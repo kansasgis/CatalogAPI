@@ -2,35 +2,45 @@
 <html>
 
 <head>
-  <title>Kansas Catalog</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+  <title>Data Catalog</title>
 </head>
 
 <body>
 
-  <h1 id="demo"></h1>
+  <h1 id="Agency"></h1>
 
   <h2>Catalog Entries:</h2>
 
-  <p id="catalog"></p>
+  <div id='catalog'></div>
 
 
 <script>
 var xmlhttp = new XMLHttpRequest();
-var url = "https://raw.githubusercontent.com/kansasgis/CatalogAPI/master/DASC_Catalog.json";
+var xmlhttp1 = new XMLHttpRequest();
 
-xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        var myArr = JSON.parse(xmlhttp.responseText);
-        myFunction(myArr);
-        populateEntries(myArr);
-    }
-};
-xmlhttp.open("GET", url, true);
+var catalogLinkUrl = "https://raw.githubusercontent.com/kansasgis/CatalogAPI/master/CatalogLinks.json";
+var state = "Kansas";
+
+xmlhttp1.open("GET", catalogLinkUrl, true);
+xmlhttp1.onreadystatechange = function() {
+		var myArr1 = JSON.parse(xmlhttp1.responseText);
+		var stateUrl = myArr1.catalogLinks[state];
+		xmlhttp.open("GET", stateUrl, true);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				var myArr = JSON.parse(xmlhttp.responseText);
+				createTitle(myArr);
+				populateEntries(myArr);
+			}
+		};
 xmlhttp.send();
+};
+xmlhttp1.send();
 
-function myFunction(arr) {
+function createTitle(arr) {
 var out = arr.catalog.title;
-document.getElementById("demo").innerHTML = out;
+document.getElementById("Agency").innerHTML = out;
 }
 
 function populateEntries(arr) {
@@ -56,7 +66,7 @@ if (arr.catalog.catalogEntries[i].ServiceLink.length > 0) {
 bigOut += 'Web Services: <br>';
 var s;
 for(s = 0; s < arr.catalog.catalogEntries[i].ServiceLink.length; s++){
-bigOut += '<a href="' + arr.catalog.catalogEntries[i].ServiceLink[s] + '">' + arr.catalog.catalogEntries[i].ServiceLink[s] + '</a><br>';}
+bigOut += '<a target="_blank" href="' + arr.catalog.catalogEntries[i].ServiceLink[s] + '">Rest Url</a>: <a target="_blank" href="http://www.arcgis.com/home/webmap/viewer.html?url='+ arr.catalog.catalogEntries[i].ServiceLink[s] + '">View in ArcGIS.com</a><br>';}
 bigOut += '<br>'}
 
 if (arr.catalog.catalogEntries[i].Documentation.length > 0) {
