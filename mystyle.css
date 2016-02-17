@@ -7,6 +7,7 @@ font-size: 18px;
 color: #4d4d4d;
 font-size: 15px;
 font-weight: bold;
+margin: 0px;
 }
 
 #download {
@@ -14,7 +15,18 @@ color: #4d4d4d;
 font-weight: bold;
 }
 
-p {
+.iconDetails {
+margin:3px 5px 3px 3px;
+float:left;
+}
+
+.linkTable {
+float: right;
+margin:4px;
+border-collapse:collapse;
+}
+
+.dataEntry {
 border: 1px solid #d9d9d9;
 background-color: white;
 border-radius: 2px;
@@ -22,6 +34,12 @@ padding: 5px;
 width: 45%;
 float: left;
 margin: 5px 10px 10px 10px;
+}
+
+button {
+color: #e6e6e6;
+background-color: gray;
+border-radius: 2px;
 }
 
 body {
@@ -34,34 +52,34 @@ a {
 font-size: small;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #00cc99;
-    width: 100%;
+.menu {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #00cc99;
+width: 100%;
 }
 
-li {
-    float: left;
+.menuli {
+float: left;
 }
 
-li a {
-    display: block;
-    font-size: 12px;
-    font-weight: bold;
-    color: #4d4d4d;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+.menulia {
+display: block;
+font-size: 12px;
+font-weight: bold;
+color: #4d4d4d;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
 }
 
 /* Change the link color on hover */
-li a:hover {
-    background-color: #999999;
+.menulia:hover {
+background-color: #999999;
 }
 
 .active {
-    background-color: #4CAF50;
+background-color: #4CAF50;
 }

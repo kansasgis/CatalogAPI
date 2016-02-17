@@ -3,17 +3,17 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="mystyle.css">
-  <title>Data Catalog</title>
+    <title>Data Catalog</title>
 </head>
 
 <body>
 
   <h1 id="Agency"></h1>
 
-  <ul id="menu">
-  <li><a href="">Administrative</a></li>
-  <li><a href="">Demographic</a></li>
-  <li><a href="">Transportation</a></li>
+  <ul class="menu">
+  <li class="menuli"><a class="menulia" href="">Administrative</a></li>
+  <li class="menuli"><a class="menulia" href="">Demographic</a></li>
+  <li class="menuli"><a class="menulia" href="">Transportation</a></li>
   </ul>
 
   <div id='catalog'></div>
@@ -48,46 +48,60 @@ document.getElementById("Agency").innerHTML = out;
 }
 
 function populateEntries(arr) {
-var bigOut = "";
-var i;
-for(i = 0; i < arr.catalog.catalogEntries.length; i++){
-if (arr.catalog.catalogEntries[i].Thumbnail.length > 0) {
-bigOut += '<img src="' + arr.catalog.catalogEntries[i].Thumbnail + '" />';
+	var bigOut = "";
+
+	for(var i = 0; i < arr.catalog.catalogEntries.length; i++){
+
+		bigOut += '<div class="dataEntry">'
+
+		if (arr.catalog.catalogEntries[i].Thumbnail != "") {
+			bigOut += '<img src="' + arr.catalog.catalogEntries[i].Thumbnail + '" class="iconDetails"/>';
+		};
+
+		var linkArray = [arr.catalog.catalogEntries[i].WebLink, arr.catalog.catalogEntries[i].MetadataLink, arr.catalog.catalogEntries[i].ServiceLink[0]];
+
+		if (linkArray != ["","",""]) {
+			bigOut += '<table class="linkTable">'
+			if (linkArray[0] != "") {
+				bigOut += '<tr><td><a target="_blank" href="'+ linkArray[0] + '" title="Permalink"><img src="http://data.kansasgis.org/requests/AGOL/permalink.png" /></a></td></tr>'
+			};
+			if (linkArray[1] != "") {
+				bigOut += '<tr><td><a target="_blank" href="'+ linkArray[1] + '" title="Full metadata"><img src="http://data.kansasgis.org/requests/AGOL/metadata.png"  /></a></td></tr>'
+			};
+			if (linkArray[2] != "") {
+				bigOut += '<tr><td><a target="_blank" href="'+ linkArray[2] + '" title="Rest URL"><img src="http://data.kansasgis.org/requests/AGOL/REST.png"  /></a></td></tr>'
+				bigOut += '<tr><td><a target="_blank" href="http://www.arcgis.com/home/webmap/viewer.html?url='+ linkArray[2] + '" title="ArcGIS Online"><img src="http://data.kansasgis.org/requests/AGOL/ArcGISOnline.png"  /></a></td></tr>'
+			};
+			if (arr.catalog.catalogEntries[i].Documentation.length > 0) {
+				for(var d = 0; d < arr.catalog.catalogEntries[i].Documentation.length; d++){
+					bigOut += '<tr><td><a target="_blank" href="' + arr.catalog.catalogEntries[i].Documentation[d] + '" title="Documentation: ' + arr.catalog.catalogEntries[i].Documentation[d] + '"><img src="http://data.kansasgis.org/requests/AGOL/DOC.png" /></a></td></tr>';
+				}
+			};
+			bigOut += '</table>'
+		};
+
+		bigOut += '<span id="title">' + arr.catalog.catalogEntries[i].Title +
+		'</span> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br><br>' +
+		arr.catalog.catalogEntries[i].Description + '<br><br>';
+
+
+
+		bigOut += 'Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>'
+
+
+		if (arr.catalog.catalogEntries[i].DownloadLink.length > 0) {
+			bigOut += '<br><span id="download">Data Downloads</span>: <br>';
+			for(var ddi = 0; ddi < arr.catalog.catalogEntries[i].DownloadLink.length; ddi++){
+				bigOut += '<a href="' + arr.catalog.catalogEntries[i].DownloadLink[ddi].url + '">'
+				+ arr.catalog.catalogEntries[i].DownloadLink[ddi].DataTitle + ': ' + arr.catalog.catalogEntries[i].DownloadLink[ddi].DataType + '</a><br>'
+			}
+			bigOut += '<br>'
+		};
+
+		bigOut += '</div>';
+	};
+	document.getElementById("catalog").innerHTML = bigOut;
 };
-
-bigOut += '<p><span id="title">' + arr.catalog.catalogEntries[i].Title +
-'</span> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br> <a href="' + arr.catalog.catalogEntries[i].WebLink + '">Permalink</a><br><br>' +
-arr.catalog.catalogEntries[i].Description + '<br><br> Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>';
-
-if (arr.catalog.catalogEntries[i].MetadataLink != "") {
-	bigOut += '<a href="' + arr.catalog.catalogEntries[i].MetadataLink + '">Full Metadata</a><br>'}
-
-if (arr.catalog.catalogEntries[i].DownloadLink.length > 0) {
-bigOut += '<br><span id="download">Data Downloads</span>: <br>';
-var ddi;
-for(ddi = 0; ddi < arr.catalog.catalogEntries[i].DownloadLink.length; ddi++){
-bigOut += '<a href="' + arr.catalog.catalogEntries[i].DownloadLink[ddi].url + '">'
-+ arr.catalog.catalogEntries[i].DownloadLink[ddi].DataTitle + ': ' + arr.catalog.catalogEntries[i].DownloadLink[ddi].DataType + '</a><br>' }
-bigOut += '<br>'}
-
-if (arr.catalog.catalogEntries[i].ServiceLink.length > 0) {
-bigOut += 'Web Services: <br>';
-var s;
-for(s = 0; s < arr.catalog.catalogEntries[i].ServiceLink.length; s++){
-bigOut += '<a target="_blank" href="' + arr.catalog.catalogEntries[i].ServiceLink[s] + '">Rest Url</a>: <a target="_blank" href="http://www.arcgis.com/home/webmap/viewer.html?url='+ arr.catalog.catalogEntries[i].ServiceLink[s] + '">View in ArcGIS.com</a><br>';}
-bigOut += '<br>'}
-
-if (arr.catalog.catalogEntries[i].Documentation.length > 0) {
-bigOut += 'Documentation: <br>';
-var d;
-for(d = 0; d < arr.catalog.catalogEntries[i].Documentation.length; d++){
-bigOut += '<a href="' + arr.catalog.catalogEntries[i].Documentation[d] + '">' + arr.catalog.catalogEntries[i].Documentation[d] + '</a><br>';}
-bigOut += '<br>'}
-
-bigOut += '</p>';
-}
-document.getElementById("catalog").innerHTML = bigOut;
-}
 
 function showStuff(kind) {
 	document.getElementById(kind).color = orange;
