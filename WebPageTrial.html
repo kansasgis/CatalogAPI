@@ -10,7 +10,11 @@
 
   <h1 id="Agency"></h1>
 
-  <h2>Catalog Entries:</h2>
+  <ul id="menu">
+  <li><a href="">Administrative</a></li>
+  <li><a href="">Demographic</a></li>
+  <li><a href="">Transportation</a></li>
+  </ul>
 
   <div id='catalog'></div>
 
@@ -47,15 +51,15 @@ function populateEntries(arr) {
 var bigOut = "";
 var i;
 for(i = 0; i < arr.catalog.catalogEntries.length; i++){
-bigOut += '<p><b>' + arr.catalog.catalogEntries[i].Title +
-'</b> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br> <a href="' + arr.catalog.catalogEntries[i].WebLink + '">Permalink</a><br>' +
-arr.catalog.catalogEntries[i].Description + '<br> Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>';
+bigOut += '<p><span id="title">' + arr.catalog.catalogEntries[i].Title +
+'</span> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br> <a href="' + arr.catalog.catalogEntries[i].WebLink + '">Permalink</a><br><br>' +
+arr.catalog.catalogEntries[i].Description + '<br><br> Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>';
 
 if (arr.catalog.catalogEntries[i].MetadataLink != "") {
 	bigOut += '<a href="' + arr.catalog.catalogEntries[i].MetadataLink + '">Full Metadata</a><br>'}
 
 if (arr.catalog.catalogEntries[i].DownloadLink.length > 0) {
-bigOut += '<br>Data Downloads: <br>';
+bigOut += '<br><span id="download">Data Downloads</span>: <br>';
 var ddi;
 for(ddi = 0; ddi < arr.catalog.catalogEntries[i].DownloadLink.length; ddi++){
 bigOut += '<a href="' + arr.catalog.catalogEntries[i].DownloadLink[ddi].url + '">'
@@ -80,6 +84,10 @@ bigOut += '</p>';
 }
 document.getElementById("catalog").innerHTML = bigOut;
 }
+
+function showStuff(kind) {
+	document.getElementById(kind).color = orange;
+};
 </script>
 </body>
 </html>

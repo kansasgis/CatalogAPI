@@ -15,7 +15,9 @@
 		"DataCreator": "U.S. Census Bureau",
 		"WebLink": "http://kansasgis.org/catalog/index.cfm?data_id=1444&show_cat=1",
 		"Tags": ["Kansas","County","Boundary","Census"],
-		"GeoJsonLink": null},
+		"GeoJsonLink": null,
+		"Thumbnail": "http://data.kansasgis.org/requests/AGOL/KS_CountyWebsites.jpg"
+		},
                 {
                 "ID": "1762",
 		"Title": "PLSS Township Range",
@@ -53,7 +55,9 @@
 		"DataCreator": "Kansas Department of Transportation",
 		"WebLink": "http://kansasgis.org/catalog/index.cfm?data_id=275&show_cat=12",
 		"Tags": ["Kansas","Roads","Streets","Highways","Transportation","KDOT"],
-		"GeoJsonLink": null}
+		"GeoJsonLink": null,
+		"Thumbnail": "http://data.kansasgis.org/requests/AGOL/KDOT_Roads.jpg"
+		}
                 ]
     }
 }

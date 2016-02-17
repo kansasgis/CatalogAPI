@@ -1,13 +1,67 @@
-h2 {
-color: blue
+h1 {
+color: #4d4d4d;
+font-size: 18px;
+}
+
+#title {
+color: #4d4d4d;
+font-size: 15px;
+font-weight: bold;
+}
+
+#download {
+color: #4d4d4d;
+font-weight: bold;
 }
 
 p {
-border: 1px solid gray;
-border-radius: 5px;
+border: 1px solid #d9d9d9;
+background-color: white;
+border-radius: 2px;
 padding: 5px;
+width: 45%;
+float: left;
+margin: 5px 10px 10px 10px;
 }
 
 body {
+background-color: #f0f5f5;
 font-family: Verdana;
+font-size: 13px;
+}
+
+a {
+font-size: small;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #00cc99;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #4d4d4d;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #999999;
+}
+
+.active {
+    background-color: #4CAF50;
 }
