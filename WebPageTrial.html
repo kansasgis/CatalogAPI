@@ -51,6 +51,10 @@ function populateEntries(arr) {
 var bigOut = "";
 var i;
 for(i = 0; i < arr.catalog.catalogEntries.length; i++){
+if (arr.catalog.catalogEntries[i].Thumbnail.length > 0) {
+bigOut += '<img src="' + arr.catalog.catalogEntries[i].Thumbnail + '" />';
+};
+
 bigOut += '<p><span id="title">' + arr.catalog.catalogEntries[i].Title +
 '</span> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br> <a href="' + arr.catalog.catalogEntries[i].WebLink + '">Permalink</a><br><br>' +
 arr.catalog.catalogEntries[i].Description + '<br><br> Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>';

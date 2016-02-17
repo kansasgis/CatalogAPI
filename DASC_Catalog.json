@@ -33,7 +33,8 @@
 		"DataCreator": "Kansas Geological Survey",
 		"WebLink": "http://kansasgis.org/catalog/index.cfm?data_id=1762&show_cat=15",
 		"Tags": ["Kansas","Section","Township","Range","PLSS","Cadastral","Survey"],
-		"GeoJsonLink": null},
+		"GeoJsonLink": null,
+		"Thumbnail": ""},
 		{
 		"ID": "275",
 		"Title": "Roads and Highways",
