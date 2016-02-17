@@ -65,7 +65,7 @@ width: 100%;
 float: left;
 }
 
-.menulia {
+.menulibutton {
 display: block;
 font-size: 12px;
 font-weight: bold;
@@ -73,10 +73,12 @@ color: #4d4d4d;
 text-align: center;
 padding: 14px 16px;
 text-decoration: none;
+border:none;
+background-color: #00cc99;
 }
 
 /* Change the link color on hover */
-.menulia:hover {
+.menulibutton:hover {
 background-color: #999999;
 }
 

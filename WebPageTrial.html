@@ -2,109 +2,138 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="mystyle.css">
-    <title>Data Catalog</title>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <title>Data Catalog</title>
 </head>
 
 <body>
 
   <h1 id="Agency"></h1>
-
-  <ul class="menu">
-  <li class="menuli"><a class="menulia" href="">Administrative</a></li>
-  <li class="menuli"><a class="menulia" href="">Demographic</a></li>
-  <li class="menuli"><a class="menulia" href="">Transportation</a></li>
-  </ul>
-
+  <div id='menuItem'></div>
   <div id='catalog'></div>
 
 
 <script>
 var xmlhttp = new XMLHttpRequest();
 var xmlhttp1 = new XMLHttpRequest();
+var myArr = "";
 
 var catalogLinkUrl = "https://raw.githubusercontent.com/kansasgis/CatalogAPI/master/CatalogLinks.json";
 var state = "Kansas";
 
 xmlhttp1.open("GET", catalogLinkUrl, true);
 xmlhttp1.onreadystatechange = function() {
-		var myArr1 = JSON.parse(xmlhttp1.responseText);
-		var stateUrl = myArr1.catalogLinks[state];
-		xmlhttp.open("GET", stateUrl, true);
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var myArr = JSON.parse(xmlhttp.responseText);
-				createTitle(myArr);
-				populateEntries(myArr);
-			}
-		};
-xmlhttp.send();
+	var myArr1 = JSON.parse(xmlhttp1.responseText);
+	var stateUrl = myArr1.catalogLinks[state];
+	xmlhttp.open("GET", stateUrl, true);
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			myArr = JSON.parse(xmlhttp.responseText);
+			createTitle(myArr);
+			createMenu(myArr);
+			populateEntries(myArr, "ALL");
+		}
+	};
+	xmlhttp.send();
 };
 xmlhttp1.send();
 
 function createTitle(arr) {
-var out = arr.catalog.title;
-document.getElementById("Agency").innerHTML = out;
+	var out = arr.catalog.title;
+	document.getElementById("Agency").innerHTML = out;
 }
 
-function populateEntries(arr) {
+function createMenu(arr) {
+	sortJsonArrayByProperty(arr, "DataCategory", 1);
+	var menuText = '<div><ul class="menu"><li class="menuli"><button class="menulibutton" onclick="populateEntries(myArr, ' + "'" + 'ALL' + "'" + ')">View All</button></li>';
+	for(var i = 0; i < arr.catalog.catalogEntries.length; i++){
+		var kind = arr.catalog.catalogEntries[i].DataCategory;
+		menuText += '<li class="menuli"><button class="menulibutton" onclick="populateEntries(myArr, ' + "'" + kind + "'" +
+		')">' + kind + '</button></li>';
+	};
+	menuText += '</ul></div>';
+	document.getElementById("menuItem").innerHTML = menuText;
+};
+
+function populateEntries(arr, category) {
+	sortJsonArrayByProperty(arr, "Title", 1);
 	var bigOut = "";
 
 	for(var i = 0; i < arr.catalog.catalogEntries.length; i++){
 
-		bigOut += '<div class="dataEntry">'
+		if (category == "ALL" || arr.catalog.catalogEntries[i].DataCategory == category) {
 
-		if (arr.catalog.catalogEntries[i].Thumbnail != "") {
-			bigOut += '<img src="' + arr.catalog.catalogEntries[i].Thumbnail + '" class="iconDetails"/>';
-		};
+			bigOut += '<div class="dataEntry">'
 
-		var linkArray = [arr.catalog.catalogEntries[i].WebLink, arr.catalog.catalogEntries[i].MetadataLink, arr.catalog.catalogEntries[i].ServiceLink[0]];
+			if (arr.catalog.catalogEntries[i].Thumbnail != "") {
+				bigOut += '<img src="' + arr.catalog.catalogEntries[i].Thumbnail + '" class="iconDetails"/>';
+			};
 
-		if (linkArray != ["","",""]) {
-			bigOut += '<table class="linkTable">'
-			if (linkArray[0] != "") {
-				bigOut += '<tr><td><a target="_blank" href="'+ linkArray[0] + '" title="Permalink"><img src="http://data.kansasgis.org/requests/AGOL/permalink.png" /></a></td></tr>'
+			var linkArray = [arr.catalog.catalogEntries[i].WebLink, arr.catalog.catalogEntries[i].MetadataLink, arr.catalog.catalogEntries[i].ServiceLink[0]];
+
+			if (linkArray != ["","",""]) {
+				bigOut += '<table class="linkTable">'
+				if (linkArray[0] != "") {
+					bigOut += '<tr><td><a target="_blank" href="'+ linkArray[0] + '" title="Permalink"><img src="http://data.kansasgis.org/requests/AGOL/permalink.png" /></a></td></tr>'
+				};
+				if (linkArray[1] != "") {
+					bigOut += '<tr><td><a target="_blank" href="'+ linkArray[1] + '" title="Full metadata"><img src="http://data.kansasgis.org/requests/AGOL/metadata.png"  /></a></td></tr>'
+				};
+				if (linkArray[2] != "") {
+					bigOut += '<tr><td><a target="_blank" href="'+ linkArray[2] + '" title="Rest URL"><img src="http://data.kansasgis.org/requests/AGOL/REST.png"  /></a></td></tr>'
+					bigOut += '<tr><td><a target="_blank" href="http://www.arcgis.com/home/webmap/viewer.html?url='+ linkArray[2] + '" title="ArcGIS Online"><img src="http://data.kansasgis.org/requests/AGOL/ArcGISOnline.png"  /></a></td></tr>'
+				};
+				if (arr.catalog.catalogEntries[i].Documentation.length > 0) {
+					for(var d = 0; d < arr.catalog.catalogEntries[i].Documentation.length; d++){
+						bigOut += '<tr><td><a target="_blank" href="' + arr.catalog.catalogEntries[i].Documentation[d] + '" title="Documentation: ' + arr.catalog.catalogEntries[i].Documentation[d] + '"><img src="http://data.kansasgis.org/requests/AGOL/DOC.png" /></a></td></tr>';
+					}
+				};
+				bigOut += '</table>'
 			};
-			if (linkArray[1] != "") {
-				bigOut += '<tr><td><a target="_blank" href="'+ linkArray[1] + '" title="Full metadata"><img src="http://data.kansasgis.org/requests/AGOL/metadata.png"  /></a></td></tr>'
-			};
-			if (linkArray[2] != "") {
-				bigOut += '<tr><td><a target="_blank" href="'+ linkArray[2] + '" title="Rest URL"><img src="http://data.kansasgis.org/requests/AGOL/REST.png"  /></a></td></tr>'
-				bigOut += '<tr><td><a target="_blank" href="http://www.arcgis.com/home/webmap/viewer.html?url='+ linkArray[2] + '" title="ArcGIS Online"><img src="http://data.kansasgis.org/requests/AGOL/ArcGISOnline.png"  /></a></td></tr>'
-			};
-			if (arr.catalog.catalogEntries[i].Documentation.length > 0) {
-				for(var d = 0; d < arr.catalog.catalogEntries[i].Documentation.length; d++){
-					bigOut += '<tr><td><a target="_blank" href="' + arr.catalog.catalogEntries[i].Documentation[d] + '" title="Documentation: ' + arr.catalog.catalogEntries[i].Documentation[d] + '"><img src="http://data.kansasgis.org/requests/AGOL/DOC.png" /></a></td></tr>';
+
+			bigOut += '<span id="title">' + arr.catalog.catalogEntries[i].Title +
+			'</span> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br><br>' +
+			arr.catalog.catalogEntries[i].Description + '<br><br>';
+
+
+
+			bigOut += 'Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>'
+
+
+			if (arr.catalog.catalogEntries[i].DownloadLink.length > 0) {
+				bigOut += '<br><span id="download">Data Downloads</span>: <br>';
+				for(var ddi = 0; ddi < arr.catalog.catalogEntries[i].DownloadLink.length; ddi++){
+					bigOut += '<a href="' + arr.catalog.catalogEntries[i].DownloadLink[ddi].url + '">'
+					+ arr.catalog.catalogEntries[i].DownloadLink[ddi].DataTitle + ': ' + arr.catalog.catalogEntries[i].DownloadLink[ddi].DataType + '</a><br>'
 				}
+				bigOut += '<br>'
 			};
-			bigOut += '</table>'
+
+			bigOut += '</div>';
 		};
-
-		bigOut += '<span id="title">' + arr.catalog.catalogEntries[i].Title +
-		'</span> (WKID: ' + arr.catalog.catalogEntries[i].Projection + ')<br><br>' +
-		arr.catalog.catalogEntries[i].Description + '<br><br>';
-
-
-
-		bigOut += 'Data Creator: ' + arr.catalog.catalogEntries[i].DataCreator + '<br>'
-
-
-		if (arr.catalog.catalogEntries[i].DownloadLink.length > 0) {
-			bigOut += '<br><span id="download">Data Downloads</span>: <br>';
-			for(var ddi = 0; ddi < arr.catalog.catalogEntries[i].DownloadLink.length; ddi++){
-				bigOut += '<a href="' + arr.catalog.catalogEntries[i].DownloadLink[ddi].url + '">'
-				+ arr.catalog.catalogEntries[i].DownloadLink[ddi].DataTitle + ': ' + arr.catalog.catalogEntries[i].DownloadLink[ddi].DataType + '</a><br>'
-			}
-			bigOut += '<br>'
-		};
-
-		bigOut += '</div>';
 	};
 	document.getElementById("catalog").innerHTML = bigOut;
 };
 
-function showStuff(kind) {
-	document.getElementById(kind).color = orange;
+function sortJsonArrayByProperty(objArray, prop, direction){
+    if (arguments.length<2) throw new Error("sortJsonArrayByProp requires 2 arguments");
+    var direct = arguments.length>2 ? arguments[2] : 1; //Default to ascending
+
+    if (objArray && objArray.constructor===Array){
+        var propPath = (prop.constructor===Array) ? prop : prop.split(".");
+        objArray.sort(function(a,b){
+            for (var p in propPath){
+                if (a[propPath[p]] && b[propPath[p]]){
+                    a = a[propPath[p]];
+                    b = b[propPath[p]];
+                }
+            }
+            // convert numeric strings to integers
+            a = a.match(/^\d+$/) ? +a : a;
+            b = b.match(/^\d+$/) ? +b : b;
+            return ( (a < b) ? -1*direct : ((a > b) ? 1*direct : 0) );
+        });
+    }
 };
 </script>
 </body>
