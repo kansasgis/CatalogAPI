@@ -45,12 +45,22 @@ function createTitle(arr) {
 
 function createMenu(arr) {
 	sortJsonArrayByProperty(arr, "DataCategory", 1);
-	var menuText = '<div><ul class="menu"><li class="menuli"><button class="menulibutton" onclick="populateEntries(myArr, ' + "'" + 'ALL' + "'" + ')">View All</button></li>';
+	var menuArray = [];
 	for(var i = 0; i < arr.catalog.catalogEntries.length; i++){
 		var kind = arr.catalog.catalogEntries[i].DataCategory;
-		menuText += '<li class="menuli"><button class="menulibutton" onclick="populateEntries(myArr, ' + "'" + kind + "'" +
-		')">' + kind + '</button></li>';
-	};
+		var a = menuArray.indexOf(kind);
+		if (a == -1) {
+			menuArray.push(kind);
+		};
+	}
+	menuArray.sort()
+
+	var menuText = '<div><ul class="menu"><li class="menuli"><button class="menulibutton" onclick="populateEntries(myArr, ' + "'" + 'ALL' + "'" + ')">View All</button></li>';
+	for(var i = 0; i < menuArray.length; i++){
+		var name = menuArray[i];
+		menuText += '<li class="menuli"><button class="menulibutton" onclick="populateEntries(myArr, ' + "'" + name + "'" +
+		')">' + name + '</button></li>';
+		};
 	menuText += '</ul></div>';
 	document.getElementById("menuItem").innerHTML = menuText;
 };
