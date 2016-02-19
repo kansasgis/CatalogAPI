@@ -164,6 +164,33 @@
 		"GeoJsonLink": null,
 		"Thumbnail": ""
 		}
-                ]
-    }
-}
+                ,{"ID":"62",
+                "Title":"Kansas Water Features",
+                "Description":"Water features such as rivers, lakes, reservoirs, creeks, and flowlines for the State of Kansas from the National Hydrography Dataset. NHD Flow Lines are river and stream lines, NHD Water Areas are polygons of rivers and streams, and NHD Water Bodies are lakes and ponds. Update date is reflected in feature level metadata.",
+                "DownloadLink":[{"DataTitle":"Water Areas- Creek and River Polygons",
+                		"DataType":"Shapefile",
+                		"url":"http://data.kansasgis.org/water_resources/gdb/nhd/NHD_AREA_SHP.zip"}
+                		,{"DataTitle":"Flow Lines- Streams and River",
+                		"DataType":"Shapefile",
+                		"url":"http://data.kansasgis.org/water_resources/gdb/nhd/NHD_FLOWLINES_SHP.zip"},
+                		{"DataTitle":"Water Bodies- Lakes and Ponds",
+                		"DataType":"Shapefile",
+                		"url":"http://data.kansasgis.org/water_resources/gdb/nhd/NHD_WATERBODIES_SHP.zip"},
+                		{"DataTitle":"Water Areas- Creek and River Polygons",
+                		"DataType":"File Geodatabase",
+                		"url":"http://data.kansasgis.org/water_resources/gdb/nhd/NHD_AREA.zip"},
+                		{"DataTitle":"Flow Lines- Streams and River",
+                		"DataType":"Shapefile",
+                		"url":"http://data.kansasgis.org/water_resources/gdb/nhd/NHD_FLOWLINES_SHP.zip"},
+                		{"DataTitle":"Water Bodies- Lakes and Ponds",
+                		"DataType":"Shapefile",
+                		"url":"http://data.kansasgis.org/water_resources/gdb/nhd/NHD_WATERBODIES_SHP.zip"}],
+                "ServiceLink":["http://services.kansasgis.org/arcgis5/rest/services/ks_water_resources/KS_WaterFeatures/MapServer"],
+                "MetadataLink":"http://kansasgis.org/catalog/_cat_metadata.cfm?meta_id=1101",
+                "DataCategory":"Water Resources",
+                "Documentation":["http://nhdgeo.usgs.gov/viewer.htm"],
+                "DataCreator":"US Geological Survey",
+                "WebLink":"http://kansasgis.org/catalog/index.cfm?data_id=62&show_cat=13",
+                "Tags":["water","pond","lake","stream","river","creek"],
+                "GeoJsonLink":"","Thumbnail":"http://data.kansasgis.org/requests/AGOL/water.png"}
+                ]}}
