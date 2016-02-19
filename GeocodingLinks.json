@@ -1,0 +1,4 @@
+{    "geocodingLinks": {
+        "Kansas": "http://services.kansasgis.org/arcgis4/rest/services/Geocoders/KS_Geocoder/GeocodeServer"
+        }
+}
