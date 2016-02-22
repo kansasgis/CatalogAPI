@@ -1,0 +1,139 @@
+{
+  "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+  "dataset": [
+    {
+      "accessLevel": "public",
+      "contactPoint": {
+        "fn": "Kansas Data Access and Support Center",
+        "hasEmail": "mailto:dasc@kansasgis.org"
+      },
+      "description": "Census TIGER/Line data for multiple years, some years include demographic data. Each year's download includes specific metadata. For additional documentation on attributes, please see associated links.",
+      "distribution": [
+        {
+          "downloadURL": "http://data.kansasgis.org/administrative_boundaries/shp/tiger2014/TIGER2014_County.zip",
+          "mediaType": "application/zip",
+          "format": "shapefile",
+          "title": "2014 Census Counties"
+        },
+        { 
+          "downloadURL": "http://data.kansasgis.org/requests/AGOL/KS_CountyWebsites.jpg",
+          "mediaType": "application/thumbnail",
+          "title": "thumbnail"
+        },
+        {
+          "downloadURL": "http://services.kansasgis.org/arcgis5/rest/services/admin_boundaries/KS_Census2010/MapServer",
+          "mediaType": "service/rest"
+        },
+        {
+	  "accessURL": "http://kansasgis.org/catalog/index.cfm?data_id=1444&show_cat=1"
+        }
+      ],
+      "theme": "Demographic",
+      "identifier": "",
+      "keyword": [
+        "Kansas",
+        "County",
+        "Boundary",
+        "Census"
+      ],
+      "publisher": {
+        "name": "Kansas Data Access and Support Center",
+        "subOrganizationOf": {
+          "name": "State of Kansas"
+        }
+      },
+      "title": "County Boundaries"
+    },
+    {
+      "accessLevel": "public",
+      "contactPoint": {
+        "fn": "Kansas Data Access and Support Center",
+        "hasEmail": "mailto:dasc@kansasgis.org"
+      },
+      "description": "Township and range portion of the Public Land Survey System (PLSS)",
+      "distribution": [
+              {
+                "downloadURL": "http://data.kansasgis.org/cadastral/shp/plss/TownshipRange.zip",
+                "mediaType": "application/zip",
+                "format": "shapefile",
+                "title": "PLSS Section Township Range"
+              },
+              {
+                "downloadURL": "http://services.kansasgis.org/arcgis2/rest/services/plss/plss/MapServer",
+                "mediaType": "service/rest"
+              },
+              {
+      	  	"accessURL": "http://kansasgis.org/catalog/index.cfm?data_id=1762&show_cat=15"
+              }
+      
+            ],
+      "theme": "Cadastral",
+      "keyword": [
+        "Kansas",
+        "township",
+        "range",
+        "plss",
+        "cadastral",
+        "survey"
+      ],
+      "publisher": {
+        "name": "Kansas Data Access and Support Center",
+        "subOrganizationOf": {
+	   "name": "State of Kansas"
+        }
+      },
+      "title": "PLSS Township Range"
+    },
+    {
+      "accessLevel": "public",
+      "contactPoint": {
+        "fn": "Kansas Data Access and Support Center",
+        "hasEmail": "mailto:dasc@kansasgis.org"
+      },
+      "description": "Roads coverage in Kansas as reported by the Kansas Department of Transportation. Data and metadata for local roads and state highways are split into separate files. Non state system includes rural, county, and city roads. Highways include interstates, US highways, and state highways. This data is a work in progress.",
+      "distribution": [
+        {
+          "title": "Kansas Non State Roads",
+	  "mediaType": "application/zip",
+	  "format": "shapefile",
+	  "downloadURL": "http://data.kansasgis.org/transportation/shp/kdot/KDOT_Non_State_Road_System.zip"
+	},
+	{
+	  "title": "Kansas Highways: Shapefile",
+	  "mediaType": "application/zip"
+	  "format": "shapefile",
+	  "downloadURL": "http://data.kansasgis.org/transportation/shp/kdot/KDOT_StateSystem.zip"
+	},
+	{
+	  "title": "Kansas Highways: Geodatabase",
+	  "mediaType": "application/zip",
+	  "format": "File Geodatabase",
+	  "downloadURL": "http://data.kansasgis.org/transportation/gdb/kdot/KDOT_StateSystem.zip"
+	},
+	{
+	  "downloadURL": "http://services.kansasgis.org/arcgis5/rest/services/ks_transportation/KDOT_Roads/MapServer",
+	  "mediaType": "service/rest"
+	},
+	{
+	  "accessURL": "http://kansasgis.org/catalog/index.cfm?data_id=275&show_cat=12"
+      	}
+      ],
+      "identifier": "",
+      "keyword": [
+        "Kansas",
+        "roads",
+        "streets",
+        "highways",
+        "transportation",
+        "KDOT"
+      ],
+      "publisher": {
+              "name": "Kansas Data Access and Support Center",
+              "subOrganizationOf": {
+      	   "name": "State of Kansas"
+              }
+      },
+      "title": "KDOT Roads and Highways"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+Project Open Data Metadata Schema v1.1: https://project-open-data.cio.gov/v1.1/metadata-resources/
+
+JSON example: https://project-open-data.cio.gov/v1.1/examples/catalog-sample.json
