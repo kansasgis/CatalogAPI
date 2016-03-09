@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# Name:        DASC_UpdateCatalogJSON
-# Purpose:     Add an entry to the DASC JSON catalog
+# Name:        DASC_OpenDataJSON
+# Purpose:     Add an entry to the DASC JSON catalog in Open Data format
 #
 # Author:      kristen
 #
